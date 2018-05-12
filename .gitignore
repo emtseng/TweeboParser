@@ -1,4 +1,2 @@
-TBParser/deps/
-TBParser/src/parser/
-TBParser/src/tagger/
-pretrained_models/
+TBParser/deps/*
+pretrained_models/*
