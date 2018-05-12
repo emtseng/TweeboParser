@@ -18,10 +18,10 @@
 
 
 
-# This script reads from raw text tweets, one line per tweet and then run Twitter POS tagger on top of it. 
+# This script reads from raw text tweets, one line per tweet and then run Twitter POS tagger on top of it.
 # (Tokenization and Converting to CoNLL format along the way.)
 
-# Receive the arguments from the calling script. 
+# Receive the arguments from the calling script.
 ROOT_DIR=$1
 TAGGER_DIR=$2
 WORKING_DIR=$3

@@ -64,11 +64,11 @@ def convert_sentence(sen):
         new_line = [str(ind), word, '_', tag, tag, '_', '0', '_',  '_',   '_']
         new_sen.append(new_line)
         ind += 1
-    return new_sen 
+    return new_sen
 
 if __name__ == '__main__':
-    sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
-    #sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='UTF-8', line_buffering=True)   #Ref: https://wiki.python.org/moin/PortingToPy3k/BilingualQuickRef#codecs
+    # sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
+    sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='UTF-8', line_buffering=True)   #Ref: https://wiki.python.org/moin/PortingToPy3k/BilingualQuickRef#codecs
     corpus = read_corpus(A.inputf)
 
     conll_format_corpus = []

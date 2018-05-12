@@ -24,10 +24,11 @@ from __future__ import division
 import viterbi, sys
 
 import codecs
+import io
 
 def print_line_withmodification(cline, tag):
     s = ""
-    for i in xrange(0,13):
+    for i in range(0,13):
         s += (cline[i] + "\t")
     s += tag
     print(s)
@@ -42,7 +43,7 @@ def main(testfile, featsfile):
     postagseqs = []
     vecs1 = []
     vecs2 = []
-    
+
     contents = []
 
     sent = []
@@ -108,20 +109,28 @@ def main(testfile, featsfile):
         sent = sents[i]
         postags = postagseqs[i]
         vec1 = vecs1[i]
-        vec2 = vecs2[i] 
+        vec2 = vecs2[i]
         tags, f = viterbi.execute(sent, labelset, postags, vec1, vec2, weights)
         for j in range(len(tags)):
             print_line_withmodification(contents[i][j],tags[j])
             if tags[j] == tagseqs[i][j]:
                 acc += 1
-        print 
+        print
         tot += len(tags)
         #print ' '.join(sent)
         #print ' '.join(tags), '\n', ' '.join(tagseqs[i])
         #print
     #sys.stderr.write(str(acc/tot) + "\n")
+
 if __name__ == "__main__":
-    sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
-    sys.stderr = codecs.getwriter('utf-8')(sys.stderr)
+    # #Python 2
+    # sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
+    # sys.stderr = codecs.getwriter('utf-8')(sys.stderr)
+
+    #Python 3
+    sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='UTF-8', line_buffering=True)   #Ref: https://wiki.python.org/moin/PortingToPy3k/BilingualQuickRef#codecs
+    sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='UTF-8', line_buffering=True)   #Ref: https://wiki.python.org/moin/PortingToPy3k/BilingualQuickRef#codecs
+
+
     main(sys.argv[1], sys.argv[2])
 
