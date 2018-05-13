@@ -1,2 +1,6 @@
 TBParser/deps/*
 pretrained_models/*
+pretrained_models.tar.gz
+TurboParser
+TurboTagger
+

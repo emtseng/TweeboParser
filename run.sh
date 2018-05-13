@@ -47,31 +47,33 @@ ${SCRIPT_DIR}/tokenize_and_tag.sh ${ROOT_DIR} ${TAGGER_DIR} ${WORKING_DIR} ${MOD
 
 # --> Append Brown Clusters on the end of each word.
 python ${SCRIPT_DIR}/AugumentBrownClusteringFeature46.py ${MODEL_DIR}/twitter_brown_clustering_full ${WORKING_DIR}/tagger.out N > ${WORKING_DIR}/tag.br.out
-rm ${WORKING_DIR}/tagger.out
+# rm ${WORKING_DIR}/tagger.out
 
 # --> Run Token Selection Tool to get the token selections appended on the end of each word.
 python ${TOKENSEL_DIR}/pipeline.py ${WORKING_DIR}/tag.br.out ${MODEL_DIR}/tokensel_weights > ${WORKING_DIR}/test
-rm ${WORKING_DIR}/tag.br.out
+# rm ${WORKING_DIR}/tag.br.out
 
 
-# -- Start Parsing.
+# # -- Start Parsing.
 
-cd ${PARSER_DIR}
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:`pwd;`/deps/local/lib:"
+# cd ${PARSER_DIR}
+# export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:`pwd;`/deps/local/lib:"
 
-# --> Parse the first time using PTB model to get the scores
+# # --> Parse the first time using PTB model to get the scores
 
-rm -f -r ${WORKING_DIR}/test_score
-mkdir ${WORKING_DIR}/test_score
+# rm -f -r ${WORKING_DIR}/test_score
+# mkdir ${WORKING_DIR}/test_score
 
-./TurboParser --test --file_model=${MODEL_DIR}/ptb_parsing_model --file_test=${WORKING_DIR}/test --file_prediction=${WORKING_DIR}/ptb_single_predict_test --output_posterior=true --use_posterior=false --posterior_dir=${WORKING_DIR}/test_score
+# ./TurboParser --test --file_model=${MODEL_DIR}/ptb_parsing_model --file_test=${WORKING_DIR}/test --file_prediction=${WORKING_DIR}/ptb_single_predict_test --output_posterior=true --use_posterior=false --posterior_dir=${WORKING_DIR}/test_score
 
-# --> Parse the second time using PTB score as features to get the final results
-./TurboParser --test --file_model=${MODEL_DIR}/parsing_model --file_test=${WORKING_DIR}/test --file_prediction=${WORKING_DIR}/test_predict --output_posterior=false --use_posterior=true --posterior_dir=${WORKING_DIR}/test_score
+# # --> Parse the second time using PTB score as features to get the final results
+# ./TurboParser --test --file_model=${MODEL_DIR}/parsing_model --file_test=${WORKING_DIR}/test --file_prediction=${WORKING_DIR}/test_predict --output_posterior=false --use_posterior=true --posterior_dir=${WORKING_DIR}/test_score
 
 # -- Output the results.
 cd ${ROOT_DIR}
-cat ${WORKING_DIR}/test_predict > ${INPUT_FILE}.predict
+cd ../
+# cat ${WORKING_DIR}/test_predict > ${INPUT_FILE}.predict
+cat ${WORKING_DIR}/tagger.out > ${INPUT_FILE}.predict
 
 fi
 
