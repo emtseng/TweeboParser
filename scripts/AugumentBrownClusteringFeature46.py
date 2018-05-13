@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Copyright (c) 2013-2014 Lingpeng Kong
 # All Rights Reserved.
 #

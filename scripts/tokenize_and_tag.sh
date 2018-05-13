@@ -30,7 +30,7 @@ SCRIPT_DIR=$5
 INPUT_FILE=$6
 
 # Tagging using the pre-trained model -- this model remove the tweets we use as the test
-${TAGGER_DIR}/runTagger.sh --model ${MODEL_DIR}/tagging_model --output-format conll ${INPUT_FILE} > ${WORKING_DIR}/Tagger_output
+${TAGGER_DIR}/runTagger.sh --model ${MODEL_DIR}/model.ritter_ptb_alldata_fixed.20130723 --output-format conll ${INPUT_FILE} > ${WORKING_DIR}/Tagger_output
 
 python ${SCRIPT_DIR}/ConvertFromTaggingResToConll.py ${WORKING_DIR}/Tagger_output > ${WORKING_DIR}/tagger.out
 
