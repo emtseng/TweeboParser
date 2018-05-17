@@ -42,16 +42,16 @@ mkdir -p working_dir
 # -- Raw text tweets, one line per tweet.
 INPUT_FILE=$1
 
-# --> Run Twitter POS tagger on top of it. (Tokenization and Converting to CoNLL format along the way.)
-${SCRIPT_DIR}/tokenize_and_tag.sh ${ROOT_DIR} ${TAGGER_DIR} ${WORKING_DIR} ${MODEL_DIR} ${SCRIPT_DIR} ${INPUT_FILE}
+# # --> Run Twitter POS tagger on top of it. (Tokenization and Converting to CoNLL format along the way.)
+# ${SCRIPT_DIR}/tokenize_and_tag.sh ${ROOT_DIR} ${TAGGER_DIR} ${WORKING_DIR} ${MODEL_DIR} ${SCRIPT_DIR} ${INPUT_FILE}
 
-# --> Append Brown Clusters on the end of each word.
-python ${SCRIPT_DIR}/AugumentBrownClusteringFeature46.py ${MODEL_DIR}/twitter_brown_clustering_full ${WORKING_DIR}/tagger.out N > ${WORKING_DIR}/tag.br.out
-rm ${WORKING_DIR}/tagger.out
+# # --> Append Brown Clusters on the end of each word.
+# python ${SCRIPT_DIR}/AugumentBrownClusteringFeature46.py ${MODEL_DIR}/twitter_brown_clustering_full ${WORKING_DIR}/tagger.out N > ${WORKING_DIR}/tag.br.out
+# rm ${WORKING_DIR}/tagger.out
 
-# --> Run Token Selection Tool to get the token selections appended on the end of each word.
-python ${TOKENSEL_DIR}/pipeline.py ${WORKING_DIR}/tag.br.out ${MODEL_DIR}/tokensel_weights > ${WORKING_DIR}/test
-rm ${WORKING_DIR}/tag.br.out
+# # --> Run Token Selection Tool to get the token selections appended on the end of each word.
+# python ${TOKENSEL_DIR}/pipeline.py ${WORKING_DIR}/tag.br.out ${MODEL_DIR}/tokensel_weights > ${WORKING_DIR}/test
+# rm ${WORKING_DIR}/tag.br.out
 
 
 # # -- Start Parsing.
